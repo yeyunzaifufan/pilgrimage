@@ -1,0 +1,4 @@
+-i https://pypi.tuna.tsinghua.edu.cn/simple/
+Django==2.1.7
+mysqlclient=1.4.2
+-e .
