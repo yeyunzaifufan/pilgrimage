@@ -1,3 +1,4 @@
+from django.db.models import Q
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404
 
@@ -35,6 +36,11 @@ class CategoryView(IndexView):
         })
         return context
 
+    def get_queryset(self):
+        query_set = super().get_queryset()
+        category_id = self.kwargs.get('category_id')
+        return query_set.filter(category_id=category_id)
+
 
 class TagView(IndexView):
     def get_context_data(self, **kwargs):
@@ -50,6 +56,29 @@ class TagView(IndexView):
         query_set = super().get_queryset()
         tag_id = self.kwargs.get('tag_id')
         return query_set.filter(tag__id=tag_id)
+
+
+class SearchView(IndexView):
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data()
+        context.update({
+            'keyword': self.request.GET.get('keyword', '')
+        })
+        return context
+
+    def get_queryset(self):
+        query_set = super(SearchView, self).get_queryset()
+        keyword = self.request.GET.get('keyword')
+        if not keyword:
+            return query_set
+        return query_set.filter(Q(title__icontains=keyword) | Q(desc__icontains=keyword))
+
+
+class AuthorView(IndexView):
+    def get_queryset(self):
+        query_set = super(AuthorView, self).get_queryset()
+        author_id = self.kwargs.get('owner_id')
+        return query_set.filter(owner_id=author_id)
 
 
 class PostDetailView(CommonViewMixin, DetailView):

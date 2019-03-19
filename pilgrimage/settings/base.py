@@ -55,7 +55,8 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'pilgrimage.urls'
 
-THEME = 'default'
+# THEME = 'default'
+THEME = 'bootstrap'
 
 TEMPLATES = [
     {

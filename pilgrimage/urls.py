@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, re_path
 
-from blog.views import post_list, post_detail, IndexView, CategoryView, TagView, PostDetailView
+from blog.views import post_list, post_detail, IndexView, CategoryView, TagView, PostDetailView, SearchView, AuthorView
 from config.views import links
 from pilgrimage.custom_site import custom_site
 
@@ -29,4 +29,6 @@ urlpatterns = [
     path('tag/<int:tag_id>/', TagView.as_view(), name='tag-list'),
     path('post/<int:post_id>/', PostDetailView.as_view(), name='post-detail'),
     path('links/', links, name='links'),
+    path('search/', SearchView.as_view(), name='search'),
+    path('author/<int:owner_id>/', AuthorView.as_view(), name='author'),
 ]
