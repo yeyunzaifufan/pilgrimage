@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path, re_path
 
 from blog.views import post_list, post_detail, IndexView, CategoryView, TagView, PostDetailView, SearchView, AuthorView
+from comment.views import CommentView
 from config.views import LinkListView
 from pilgrimage.custom_site import custom_site
 
@@ -31,4 +32,5 @@ urlpatterns = [
     path('links/', LinkListView.as_view(), name='links'),
     path('search/', SearchView.as_view(), name='search'),
     path('author/<int:owner_id>/', AuthorView.as_view(), name='author'),
+    path('comment/', CommentView.as_view(), name='comment')
 ]
