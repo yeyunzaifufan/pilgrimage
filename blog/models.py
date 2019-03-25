@@ -1,3 +1,4 @@
+import mistune
 from django.contrib.auth.models import User
 from django.db import models
 
@@ -77,6 +78,7 @@ class Post(models.Model):
     tag = models.ForeignKey(Tag, verbose_name='标签', on_delete=CASCADE)
     owner = models.ForeignKey(User, verbose_name='作者', on_delete=CASCADE, db_index=True, db_constraint=False)
     created_time = models.DateTimeField(verbose_name='创建时间', auto_now_add=True)
+    content_html = models.TextField(verbose_name='正文html代码', blank=True, editable=False)
 
     pv = models.PositiveIntegerField(verbose_name='总点击数', default=1)
     uv = models.PositiveIntegerField(verbose_name='用户点击数', default=1)
@@ -87,6 +89,10 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
+
+    def save(self, *args, **kwargs):
+        self.content_html = mistune.markdown(self.content)
+        super(Post, self).save(*args, **kwargs)
 
     @staticmethod
     def get_by_tag(tag_id):
