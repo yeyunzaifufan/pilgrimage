@@ -86,7 +86,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'pilgrimage',
         'USER': 'root',
-        'PASSWORD': 'ly123456',
+        'PASSWORD': 'Pazj2tIRN2UoT+hHO8',
         'HOST': '127.0.0.1',
         'PORT': '3306',
         'CONN_MAX_AGE': 3600,
@@ -133,5 +133,7 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
+if os.path.exists('pilgrimage/settings/local.py'):
+    from .local import *
 
 STATIC_URL = '/static/'
