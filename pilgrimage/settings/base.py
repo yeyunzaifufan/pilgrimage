@@ -25,7 +25,7 @@ SECRET_KEY = 'mkv(w=kxe4cr@i2e$=5gx$*ntb%sp4)4hv9o&p^lxqbh)+sywx'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
